@@ -1,7 +1,6 @@
 const colors = require("colors");
 const { client, env } = require('./setup');
 const config = require('./config');
-const express = require('express');
 
 console.log(colors.grey(`[LOG] STARTING PROGRAM!`));
 console.log(colors.grey(`[SETUP] CITY: ${env.city}, DELAY: ${env.delay}s`));
@@ -115,15 +114,3 @@ function replaceText(template) {
     .replace(/{PING}/g, Math.round(client.ws.ping))
     ;
 }
-
-// --- เริ่ม server HTTP รอรับ request ให้ Render มองว่าแอปพร้อม ---
-const app = express();
-const PORT = process.env.PORT || 3000;
-
-app.get("/", (req, res) => {
-  res.send("Bot is running!");
-});
-
-app.listen(PORT, () => {
-  console.log(colors.cyan(`Server listening on port ${PORT}`));
-});
